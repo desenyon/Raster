@@ -24,9 +24,10 @@ const boot = (() => {
 
 type Props = {
   onRegisterAddTab?: (addTab: () => void) => void;
+  onBlockLogged?: () => void;
 };
 
-export function TerminalWorkspace({ onRegisterAddTab }: Props) {
+export function TerminalWorkspace({ onRegisterAddTab, onBlockLogged }: Props) {
   const [tabs, setTabs] = useState<TabModel[]>(boot.tabs);
   const [activeId, setActiveId] = useState<string>(boot.id);
 
@@ -121,6 +122,7 @@ export function TerminalWorkspace({ onRegisterAddTab }: Props) {
             onSession={(sid) => onSession(t.id, sid)}
             onExit={() => onExit(t.id)}
             onError={(msg) => onErr(t.id, msg)}
+            onBlockLogged={onBlockLogged}
           />
         ))}
       </div>
